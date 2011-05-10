@@ -25,7 +25,7 @@ def attachment_form(context, obj):
             'form': None,
         }
 
-@register.inclusion_tag('attachments/delete_link.html', takes_context=True)
+@register.inclusion_tag('attachments/delete_form.html', takes_context=True)
 def attachment_delete_link(context, attachment):
     """
     Renders a html link to the delete view of the given attachment. Returns

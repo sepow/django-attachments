@@ -41,7 +41,7 @@ def add_attachment(request, app_label, module_name, pk,
         template_context.update(extra_context)
         return render_to_response(template_name, template_context,
                                   RequestContext(request))
-
+@require_POST
 @login_required
 def delete_attachment(request, attachment_pk):
     g = get_object_or_404(Attachment, pk=attachment_pk)
@@ -49,5 +49,5 @@ def delete_attachment(request, attachment_pk):
        or request.user == g.creator:
         g.delete()
         request.user.message_set.create(message=ugettext('Your attachment was deleted.'))
-    next = request.REQUEST.get('next') or '/'
+    next = request.POST.get('next') or '/'
     return HttpResponseRedirect(next)
